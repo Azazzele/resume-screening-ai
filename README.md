@@ -31,6 +31,7 @@ I recommend using a 4-layer training model.
 
 When selecting the required skills from candidates, it is recommended to exclude this object and transform it accordingly.
 <img width="839" height="49" alt="{FD71691E-3505-42BD-98C7-2E386DB62CB2}" src="https://github.com/user-attachments/assets/7cf1bb12-5b0e-4d14-9c9b-e84f80a58cac" />
+
 a new column.
 <img width="1093" height="112" alt="{B0C12620-EF57-42B6-A16C-675930ED83C2}" src="https://github.com/user-attachments/assets/3af1e26c-830b-4e95-9840-dbdc08c59c5f" />
 
