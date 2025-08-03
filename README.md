@@ -10,6 +10,7 @@ This project is designed as a practical tool for candidate suitability predictio
 
 Key features:
 
+
 Data preprocessing including encoding categorical variables and skill extraction.
 
 Customizable deep learning model architecture with multiple layers.
