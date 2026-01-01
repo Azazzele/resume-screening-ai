@@ -1,91 +1,198 @@
-# Smart Candidate Filter
+Resume Screening AI 🤖
+Automated Candidate Selection System using Machine Learning
 
-A machine learning-based system that automatically evaluates job candidates based on their resumes. It predicts whether a candidate is suitable for a position based on experience, age, and required technical skills (e.g., Python and SQL).
+Проект автоматизирует первичный отбор кандидатов и имитирует принятие решений HR-специалиста на основе данных резюме.
+Система анализирует опыт, навыки, зарплатные ожидания и другие факторы, после чего формирует shortlist наиболее подходящих кандидатов.
 
-To begin with, I want to mention that this is the first version of the project, so bugs and inconsistencies are possible.
+⚠️ Проект ориентирован на реалистичную бизнес-логику, а не «игрушечные» ML-примеры.
 
-This project was originally created to help me find a job.
-Thanks to the analysis, I reviewed over 100,000 job listings and identified the best ones.
-This project is designed as a practical tool for candidate suitability prediction based on experience, skills, and other factors. It leverages machine learning and neural networks to analyze large datasets of job applicants and highlight the most promising candidates.
+📌 Зачем этот проект
 
-Key features:
+В реальной HR-аналитике:
+
+резюме много
+
+времени мало
+
+решения должны быть объяснимыми
+
+Этот проект показывает, как:
+
+формализовать HR-логику
+
+превратить её в данные
+
+обучить ML-модель
+
+получить интерпретируемый результат
+
+🚀 Основные возможности
+
+✅ Генерация реалистичных резюме кандидатов
+
+✅ Расчёт HR_Score (0–100) по бизнес-правилам
+
+✅ Классификация кандидатов (Suitable / Not Suitable)
+
+✅ Использование Gradient Boosting для табличных данных
+
+✅ Сравнение с Random Forest
+
+✅ Анализ важности признаков
+
+✅ Экспорт финальных кандидатов в Excel
+
+✅ Сохранение модели и preprocessing-артефактов
+
+🧬 Генерация данных
+
+Так как реальные резюме использовать нельзя, был реализован реалистичный генератор кандидатов:
+
+Генерируемые поля:
+
+Full Name
+
+Age
+
+Experience (years)
+
+Specialization
+
+Skills (3–7 навыков)
+
+Has_Python / Has_SQL
+
+Expected Salary
+
+📌 Генерация учитывает:
+
+зависимость опыта от возраста
+
+рыночные зарплатные вилки
+
+случайную вариативность
+<img width="1556" height="825" alt="{945078D3-C7CD-445A-9F9E-E7275DB49A72}" src="https://github.com/user-attachments/assets/9e16a582-3b9b-46b9-951f-4252048eafe8" />
+
+🧠 HR Score — имитация решений HR
+
+Каждому кандидату присваивается HR_Score (0–100).
+
+Логика оценки:
+Фактор	Влияние
+Опыт работы	до +40
+Python	+25
+SQL	+10
+Кол-во навыков	до +15
+Высокая зарплата	−8 / −15
+Слишком молодой / возрастной	−5
+
+Suitable = HR_Score >= 60
+⚠️ Добавлен шум (10%), чтобы модель училась на неидеальных данных.
+
+🤖 Машинное обучение
+Используемые модели
+Модель	Назначение
+Gradient Boosting	Основная модель
+Random Forest	Сравнение качества
+
+Почему Gradient Boosting:
+
+отлично работает на табличных данных
+
+устойчив к шуму
+
+даёт интерпретируемые признаки
 
 
-Data preprocessing including encoding categorical variables and skill extraction.
+📊 Feature Importance
 
-Customizable deep learning model architecture with multiple layers.
+Модель показывает, что реально влияет на решение:
+<img width="413" height="266" alt="{DE402AC6-13BD-44CA-B131-2708ADDB3A0C}" src="https://github.com/user-attachments/assets/dd0de10b-3762-4677-a533-1cd653c9ed4d" />
 
-Capability to handle large datasets (100,000+ records).
+📌 Вывод:
 
-Easily adaptable to different hiring criteria and skill sets.
+Python — ключевой фактор
 
-Clear metrics for model evaluation like precision, recall, and F1-score.
+зарплата важнее возраста
 
-Designed with real-world hiring challenges in mind, including handling cases where no candidates are selected.
+специализация влияет минимально
 
-This project reflects a hands-on approach to solving real hiring challenges and can be used as a foundation for more advanced recruitment analytics tools.
+Метрики качества
+Gradient Boosting
+<img width="731" height="300" alt="{FF243BF9-7665-442E-8A2B-B72930F7B9F7}" src="https://github.com/user-attachments/assets/cd8fcf49-4fe2-43c4-8a16-6b1303ddead7" />
+📌 Интерпретация:
+
+модель редко рекомендует слабых кандидатов
+
+большинство сильных кандидатов находится
+
+хороший баланс precision / recall
+
+🏁 Финальный результат
+<img width="994" height="356" alt="{DFF34C7D-F6D9-4A82-9865-6116506464C0}" src="https://github.com/user-attachments/assets/4f6c3ee4-1c31-4285-97b2-5a633d1b5b16" />
+На выходе система:
+
+формирует shortlist кандидатов
+
+сортирует по HR_Score
+
+сохраняет в Excel
+
+📁 Файл: selected_candidates.xlsx
+
+📷 Скриншот Excel:
+<img width="1565" height="808" alt="{35068C50-CC0C-45E1-BB6B-1DAB2F37D456}" src="https://github.com/user-attachments/assets/bfa382eb-5d8e-4426-a5de-f1e999d3c101" />
 
 
+resume-screening-ai/
+│
+├── candidate_generator.py    # Генератор резюме
+├── python.py                 # ML pipeline
+├── selected_candidates.xlsx  # Итоговый shortlist
+├── candidate_model.pkl       # Модель
+├── scaler.pkl                # Scaler
+├── specialization_encoder.pkl
+├── screenshots/              # Скриншоты для README
+└── README.md
 
-I recommend using a 4-layer training model.
-<img width="1712" height="496" alt="{5E85094E-9DE3-4F6F-85B0-B20E49AAAF52}" src="https://github.com/user-attachments/assets/06df65bb-7dd3-4490-ba1f-7ff08e929efb" />
+🛠 Стек технологий
 
-When selecting the required skills from candidates, it is recommended to exclude this object and transform it accordingly.
-<img width="839" height="49" alt="{FD71691E-3505-42BD-98C7-2E386DB62CB2}" src="https://github.com/user-attachments/assets/7cf1bb12-5b0e-4d14-9c9b-e84f80a58cac" />
+Python 3.10+
 
-a new column.
-<img width="1093" height="112" alt="{B0C12620-EF57-42B6-A16C-675930ED83C2}" src="https://github.com/user-attachments/assets/3af1e26c-830b-4e95-9840-dbdc08c59c5f" />
+pandas / numpy
 
-There may be a bug where the model fails to select any candidates at all.
-It is recommended to increase the number of epochs up to 10,000.
+scikit-learn
 
+Gradient Boosting
 
-## Features
+Random Forest
 
-- ✅ Parses candidate data from Excel files
-- ✅ Filters based on:
-  - Experience (years)
-  - Age
-  - Required skills (Python, SQL, etc.)
-- ✅ Builds a neural network classifier (Keras/TensorFlow)
-- ✅ Outputs prediction results and filters top candidates
-- ✅ Can be extended to use scikit-learn or PyTorch
-
-## How It Works
-
-1. **Data Input**  
-   Upload a spreadsheet with candidate details (since.xlsx).
-
-2. **Preprocessing**  
-   - Label encoding for categorical fields (e.g. marital status)
-   - Extract skills like Has_Python, Has_SQL
-   - Drop unnecessary columns
-
-3. **Model Training**  
-   - Neural network built with TensorFlow
-   - Trained to classify candidates as Suitable or Not Suitable
-
-4. **Prediction Output**  
-   - Model predicts suitability on test data
-   - Suitable candidates exported for review
-
-## Technologies Used
-
-- Python 3.10  
-- pandas==2.2.2  
-- numpy==1.26.4  
-- scikit-learn==1.5.0  
-- tensorflow==2.15.0  
-- torch==2.2.2  
-- matplotlib==3.8.4  
-- seaborn==0.13.2  
-- openpyxl==3.1.2  
-## Usage
-
-bash
-# Install requirements (you can also use a virtual environment)
+▶️ Запуск проекта
 pip install -r requirements.txt
+python python.py
 
-# Run the model script
-python main.py
-Исправь возможноо что то ну или дополни
+🎯 Для кого проект
+
+Junior / Middle ML Engineer
+
+Data Analyst
+
+HR Analytics
+
+ML Portfolio
+
+🧩 Возможные улучшения
+
+SHAP / Explainability
+
+Реальные HR-оценки
+
+Подключение HH API
+
+Web-интерфейс
+
+Настройка порогов риска
+
+👤 Автор
+
+Проект выполнен в учебно-практических целях и ориентирован на демонстрацию реального ML-пайплайна.
