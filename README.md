@@ -109,6 +109,7 @@ Random Forest	Сравнение качества
 📊 Feature Importance
 
 Модель показывает, что реально влияет на решение:
+
 <img width="413" height="266" alt="{DE402AC6-13BD-44CA-B131-2708ADDB3A0C}" src="https://github.com/user-attachments/assets/dd0de10b-3762-4677-a533-1cd653c9ed4d" />
 
 📌 Вывод:
